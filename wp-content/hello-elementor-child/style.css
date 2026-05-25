@@ -1,0 +1,179 @@
+/*
+ Theme Name:   Hello Elementor Child
+ Description:  Child theme for Hello Elementor to customize WooCommerce product archive.
+ Author:       Jules
+ Template:     hello-elementor
+ Version:      1.0.0
+*/
+
+/* Reset and Global Styles */
+.archive.post-type-archive-product .site-main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Two-column Layout */
+.shop-container {
+    display: flex;
+    gap: 40px;
+}
+
+.shop-sidebar {
+    flex: 0 0 250px;
+}
+
+.shop-content-area {
+    flex: 1;
+}
+
+/* Sidebar Widgets */
+.shop-sidebar .widget {
+    margin-bottom: 30px;
+}
+
+.shop-sidebar h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+    text-transform: uppercase;
+}
+
+.shop-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shop-sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.shop-sidebar ul li a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.shop-sidebar ul li a:hover {
+    color: #CC3366;
+}
+
+/* Top Bar */
+.shop-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border-radius: 4px;
+}
+
+.shop-top-bar .woocommerce-result-count {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.shop-top-bar .woocommerce-ordering {
+    margin: 0;
+}
+
+.shop-top-bar .woocommerce-ordering select {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 0.9rem;
+}
+
+/* Product Grid */
+ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.products::before, ul.products::after {
+    display: none !important; /* Remove legacy clear-fixes */
+}
+
+ul.products li.product {
+    width: 100% !important;
+    margin: 0 !important;
+    float: none !important;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+ul.products li.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+ul.products li.product img {
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+ul.products li.product .woocommerce-loop-product__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+ul.products li.product .price {
+    font-size: 1.1rem;
+    color: #CC3366;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: block;
+}
+
+ul.products li.product .button {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+ul.products li.product .button:hover {
+    background: #CC3366;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .shop-container {
+        flex-direction: column;
+    }
+    .shop-sidebar {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    ul.products {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 575px) {
+    ul.products {
+        grid-template-columns: 1fr !important;
+    }
+}
