@@ -6,6 +6,10 @@
 function hello_elementor_child_enqueue_styles() {
 	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'parent-style' ), '1.0.0' );
+
+    if ( is_product() ) {
+        wp_enqueue_script( 'hello-elementor-child-single-product', get_stylesheet_directory_uri() . '/assets/js/single-product.js', array( 'jquery' ), '1.0.0', true );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_styles' );
 
@@ -23,6 +27,69 @@ function hello_elementor_child_register_sidebars() {
 	) );
 }
 add_action( 'widgets_init', 'hello_elementor_child_register_sidebars' );
+
+/**
+ * Reorder Single Product Summary
+ * Order: Title (5), Short Description (10), Price (15), Variations/Add to Cart (20)
+ */
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50 );
+
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 10 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 15 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 20 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 30 );
+
+/**
+ * Convert Variations Dropdown to Button Selection
+ */
+add_filter( 'woocommerce_dropdown_variation_attribute_options_html', 'hello_elementor_child_variation_buttons', 10, 2 );
+function hello_elementor_child_variation_buttons( $html, $args ) {
+    $options   = $args['options'];
+    $product   = $args['product'];
+    $attribute = $args['attribute'];
+    $name      = $args['name'] ? $args['name'] : 'attribute_' . sanitize_title( $attribute );
+    $id        = $args['id'] ? $args['id'] : sanitize_title( $attribute );
+    $class     = $args['class'];
+
+    if ( empty( $options ) || ! $product ) {
+        return $html;
+    }
+
+    $buttons_html = '<div class="variation-buttons" data-attribute_name="attribute_' . esc_attr( sanitize_title( $attribute ) ) . '">';
+
+    foreach ( $options as $option ) {
+        $selected = ( $args['selected'] === $option ) ? 'selected' : '';
+        $buttons_html .= sprintf(
+            '<button type="button" class="variation-button %s" data-value="%s">%s</button>',
+            $selected,
+            esc_attr( $option ),
+            esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) )
+        );
+    }
+
+    $buttons_html .= '</div>';
+
+    // Keep the original hidden select for WooCommerce core JS compatibility
+    $html = '<div class="hidden-variation-select" style="display:none;">' . $html . '</div>' . $buttons_html;
+
+    return $html;
+}
+
+/**
+ * Vertical Thumbnails for Single Product
+ */
+add_filter( 'woocommerce_single_product_image_gallery_classes', 'hello_elementor_child_vertical_thumbnails' );
+function hello_elementor_child_vertical_thumbnails( $classes ) {
+    $classes[] = 'vertical-thumbnails';
+    return $classes;
+}
 
 /**
  * Limit products per page to show 3 rows.
