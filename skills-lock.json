@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "WooCommerce Automation": {
+      "source": "claude-office-skills/skills",
+      "sourceType": "github",
+      "skillPath": "woocommerce-automation/SKILL.md",
+      "computedHash": "079d2f10aaaeb3232dee9737a0067d5bda7bb038535c44062d2bca19d12dee01"
+    },
+    "scrapy-web-scraping": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "scrapy-web-scraping/SKILL.md",
+      "computedHash": "f295a7b58c71387e9824161b6a4206d6cbca3fc93805fb51389af6ef04b03d9c"
+    },
+    "web-scraping": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "web-scraping/SKILL.md",
+      "computedHash": "29bd2147c7e254f8c431e2778ee8dda44d027d8fd58a4ddbedba68644f6fb00d"
+    },
+    "wordpress-woocommerce-development": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/wordpress-woocommerce-development/SKILL.md",
+      "computedHash": "3778909880ff9c9ea389f33ac5f1ab0dfc822d8dda51b4ee5f55bd344ba42f3d"
+    }
+  }
+}
