@@ -21,4 +21,22 @@ jQuery(document).ready(function($) {
     $(document).on('reset_data', 'form.variations_form', function() {
         $('.variation-button').removeClass('selected');
     });
+
+    // Initialize Feather Icons
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+
+    // Product Accordion/Toggle
+    $(document).on('click', '.accordion-header', function(e) {
+        e.preventDefault();
+        var $item = $(this).closest('.accordion-item');
+        var $content = $item.find('.accordion-content');
+
+        $content.slideToggle(300);
+        $item.toggleClass('active');
+
+        // Close other items (optional, make it true accordion)
+        $item.siblings().removeClass('active').find('.accordion-content').slideUp(300);
+    });
 });

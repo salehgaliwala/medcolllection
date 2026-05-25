@@ -8,7 +8,8 @@ function hello_elementor_child_enqueue_styles() {
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'parent-style' ), '1.0.0' );
 
     if ( is_product() ) {
-        wp_enqueue_script( 'hello-elementor-child-single-product', get_stylesheet_directory_uri() . '/assets/js/single-product.js', array( 'jquery' ), '1.0.0', true );
+        wp_enqueue_script( 'feather-icons', 'https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js', array(), '4.29.0', true );
+        wp_enqueue_script( 'hello-elementor-child-single-product', get_stylesheet_directory_uri() . '/assets/js/single-product.js', array( 'jquery', 'feather-icons' ), '1.0.0', true );
     }
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_styles' );
@@ -117,4 +118,59 @@ function hello_elementor_child_replace_add_to_cart_button( $link, $product, $arg
     );
 
     return $link;
+}
+
+/**
+ * Custom Product Tabs
+ */
+add_filter( 'woocommerce_product_tabs', 'hello_elementor_child_custom_product_tabs', 98 );
+function hello_elementor_child_custom_product_tabs( $tabs ) {
+    // Rename Additional Information to Specification
+    if ( isset( $tabs['additional_information'] ) ) {
+        $tabs['additional_information']['title'] = __( 'Specification', 'woocommerce' );
+        $tabs['additional_information']['callback'] = 'hello_elementor_child_specification_tab_content';
+        $tabs['additional_information']['priority'] = 5;
+    }
+
+    // Reorder Description
+    if ( isset( $tabs['description'] ) ) {
+        $tabs['description']['priority'] = 10;
+    }
+
+    // Reorder Reviews
+    if ( isset( $tabs['reviews'] ) ) {
+        $tabs['reviews']['priority'] = 15;
+    }
+
+    return $tabs;
+}
+
+/**
+ * Specification Tab Content (3 columns with icons)
+ */
+function hello_elementor_child_specification_tab_content() {
+    global $product;
+
+    $attributes = array(
+        'pa_maat'  => array( 'label' => 'Size', 'icon' => 'maximize' ),
+        'pa_kleur' => array( 'label' => 'Colour', 'icon' => 'palette' ),
+        'pa_merk'  => array( 'label' => 'Brand', 'icon' => 'tag' ),
+    );
+
+    echo '<div class="product-specifications-grid">';
+
+    foreach ( $attributes as $taxonomy => $data ) {
+        $values = $product->get_attribute( $taxonomy );
+        if ( $values ) {
+            echo '<div class="spec-column">';
+            echo '<div class="spec-icon"><i data-feather="' . esc_attr( $data['icon'] ) . '"></i></div>';
+            echo '<div class="spec-info">';
+            echo '<strong>' . esc_html( $data['label'] ) . '</strong>';
+            echo '<span>' . esc_html( $values ) . '</span>';
+            echo '</div>';
+            echo '</div>';
+        }
+    }
+
+    echo '</div>';
 }
