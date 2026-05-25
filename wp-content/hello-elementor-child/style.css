@@ -158,6 +158,128 @@ ul.products li.product .button:hover {
     background: #CC3366;
 }
 
+/* Custom Cart Icon Button */
+.custom-cart-icon-button {
+    background-color: #135E4E !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    border: none !important;
+    transition: background-color 0.3s, transform 0.3s !important;
+}
+
+.custom-cart-icon-button:hover {
+    background-color: #0e4a3d !important;
+    transform: scale(1.1);
+}
+
+.custom-cart-icon-button svg {
+    width: 20px;
+    height: 20px;
+    stroke: #fff;
+}
+
+/* Cart and Checkout Beautification */
+.woocommerce-cart table.shop_table,
+.woocommerce-checkout table.shop_table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    border-collapse: separate;
+}
+
+.woocommerce-cart table.shop_table th,
+.woocommerce-checkout table.shop_table th {
+    background: #f8f9fa;
+    color: #333;
+    font-weight: 600;
+    padding: 15px;
+    border: none;
+}
+
+.woocommerce-cart table.shop_table td,
+.woocommerce-checkout table.shop_table td {
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.woocommerce-cart .cart-collaterals,
+.woocommerce-checkout #order_review,
+.woocommerce-checkout #customer_details {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals h2,
+.woocommerce-checkout #order_review_heading,
+.woocommerce-checkout #customer_details h3 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #135E4E;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.woocommerce-checkout #payment {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.woocommerce-checkout #payment ul.payment_methods {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,
+.woocommerce-checkout #place_order {
+    background-color: #135E4E !important;
+    color: #fff !important;
+    padding: 15px 30px !important;
+    border-radius: 50px !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    transition: background-color 0.3s !important;
+}
+
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,
+.woocommerce-checkout #place_order:hover {
+    background-color: #0e4a3d !important;
+}
+
+/* Input Fields Improvement */
+.woocommerce-cart input.input-text,
+.woocommerce-checkout input.input-text,
+.woocommerce-checkout select,
+.woocommerce-checkout textarea {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.woocommerce-checkout .col2-set {
+    display: flex;
+    gap: 30px;
+}
+
+.woocommerce-checkout .col-1,
+.woocommerce-checkout .col-2 {
+    flex: 1;
+    max-width: none;
+    float: none;
+    width: auto;
+}
+
 /* Responsive */
 @media (max-width: 991px) {
     .shop-container {
