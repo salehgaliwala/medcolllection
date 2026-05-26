@@ -299,3 +299,222 @@ ul.products li.product .button:hover {
         grid-template-columns: 1fr !important;
     }
 }
+
+/* Single Product Layout */
+.custom-single-product-layout {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.product-left-section,
+.product-right-section {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+/* Vertical Thumbnails */
+.vertical-thumbnails {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.vertical-thumbnails .flex-viewport {
+    flex: 1;
+}
+
+.vertical-thumbnails .flex-control-nav {
+    flex: 0 0 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0 10px 0 0;
+    position: static;
+}
+
+.vertical-thumbnails .flex-control-nav li {
+    width: 100% !important;
+    margin: 0;
+}
+
+.vertical-thumbnails .flex-control-nav li img {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+    cursor: pointer;
+}
+
+.vertical-thumbnails .flex-control-nav li img.flex-active,
+.vertical-thumbnails .flex-control-nav li img:hover {
+    opacity: 1;
+}
+
+/* Right Section Styling */
+.product-right-section h1.product_title {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #135E4E;
+}
+
+.product-right-section .woocommerce-product-details__short-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.product-right-section .price {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 30px;
+    display: block;
+}
+
+/* Variation Buttons */
+.variation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.variation-button {
+    padding: 8px 20px;
+    border: 2px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.variation-button:hover {
+    border-color: #135E4E;
+}
+
+.variation-button.selected {
+    background-color: #135E4E;
+    color: #fff;
+    border-color: #135E4E;
+}
+
+/* Responsive Single Product */
+@media (max-width: 991px) {
+    .custom-single-product-layout {
+        flex-direction: column;
+    }
+    .product-left-section,
+    .product-right-section {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .vertical-thumbnails {
+        flex-direction: column;
+    }
+    .vertical-thumbnails .flex-control-nav {
+        flex-direction: row;
+        flex-basis: auto;
+        margin: 10px 0 0 0;
+    }
+}
+
+/* Product Accordion */
+.product-accordion {
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #eee;
+}
+
+.accordion-header {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion-header a {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+    pointer-events: none; /* Let header click handle it */
+}
+
+.accordion-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s;
+    color: #135E4E;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: 0 0 30px 0;
+}
+
+/* Specification Grid */
+.product-specifications-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.spec-column {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #fcfcfc;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+}
+
+.spec-icon {
+    background: #135E4E;
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spec-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.spec-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-info strong {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 3px;
+}
+
+.spec-info span {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Responsive Accordion */
+@media (max-width: 767px) {
+    .product-specifications-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
