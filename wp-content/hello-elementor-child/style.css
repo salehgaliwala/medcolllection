@@ -143,7 +143,7 @@ ul.products li.product .price {
 }
 
 ul.products li.product .button {
-    background: #333;
+    background: #135E4E;
     color: #fff;
     padding: 10px 20px;
     border-radius: 4px;
@@ -155,7 +155,7 @@ ul.products li.product .button {
 }
 
 ul.products li.product .button:hover {
-    background: #CC3366;
+    background: #0e4a3d;
 }
 
 /* Custom Cart Icon Button */
@@ -399,6 +399,23 @@ ul.products li.product .button:hover {
     border-color: #135E4E;
 }
 
+/* General Add to Cart Button bg color */
+.woocommerce button.button.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button,
+.woocommerce a.button {
+    background-color: #135E4E;
+    color: #fff;
+}
+
+.woocommerce button.button.alt:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button:hover,
+.woocommerce a.button:hover {
+    background-color: #0e4a3d;
+    color: #fff;
+}
+
 /* Responsive Single Product */
 @media (max-width: 991px) {
     .custom-single-product-layout {
@@ -470,11 +487,18 @@ ul.products li.product .button:hover {
 .spec-column {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background: #fcfcfc;
-    border-radius: 8px;
-    border: 1px solid #f0f0f0;
+    gap: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.spec-column:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
 }
 
 .spec-icon {
