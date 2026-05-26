@@ -151,22 +151,38 @@ function hello_elementor_child_custom_product_tabs( $tabs ) {
 function hello_elementor_child_specification_tab_content() {
     global $product;
 
-    $attributes = array(
-        'pa_maat'  => array( 'label' => 'Size', 'icon' => 'maximize' ),
-        'pa_kleur' => array( 'label' => 'Colour', 'icon' => 'palette' ),
-        'pa_merk'  => array( 'label' => 'Brand', 'icon' => 'tag' ),
+    // Map common attribute names/labels to icons
+    $specs = array(
+        'size'  => array( 'label' => __( 'Size', 'woocommerce' ), 'icon' => 'maximize', 'value' => '' ),
+        'color' => array( 'label' => __( 'Colour', 'woocommerce' ), 'icon' => 'palette', 'value' => '' ),
+        'brand' => array( 'label' => __( 'Brand', 'woocommerce' ), 'icon' => 'tag', 'value' => '' ),
     );
+
+    $all_attributes = $product->get_attributes();
+
+    foreach ( $all_attributes as $attribute ) {
+        $name = strtolower( $attribute->get_name() );
+        $label = wc_attribute_label( $attribute->get_name() );
+        $value = $product->get_attribute( $attribute->get_name() );
+
+        if ( strpos( $name, 'maat' ) !== false || strpos( strtolower($label), 'size' ) !== false || strpos( strtolower($label), 'maat' ) !== false ) {
+            $specs['size']['value'] = $value;
+        } elseif ( strpos( $name, 'kleur' ) !== false || strpos( strtolower($label), 'color' ) !== false || strpos( strtolower($label), 'kleur' ) !== false ) {
+            $specs['color']['value'] = $value;
+        } elseif ( strpos( $name, 'merk' ) !== false || strpos( strtolower($label), 'brand' ) !== false || strpos( strtolower($label), 'merk' ) !== false ) {
+            $specs['brand']['value'] = $value;
+        }
+    }
 
     echo '<div class="product-specifications-grid">';
 
-    foreach ( $attributes as $taxonomy => $data ) {
-        $values = $product->get_attribute( $taxonomy );
-        if ( $values ) {
+    foreach ( $specs as $key => $data ) {
+        if ( ! empty( $data['value'] ) ) {
             echo '<div class="spec-column">';
             echo '<div class="spec-icon"><i data-feather="' . esc_attr( $data['icon'] ) . '"></i></div>';
             echo '<div class="spec-info">';
             echo '<strong>' . esc_html( $data['label'] ) . '</strong>';
-            echo '<span>' . esc_html( $values ) . '</span>';
+            echo '<span>' . esc_html( $data['value'] ) . '</span>';
             echo '</div>';
             echo '</div>';
         }
